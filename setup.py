@@ -14,7 +14,7 @@ requirements = [
     "multiprocessing-logging",
     "configobj",
     "slurmio",
-    "imio==0.1.0",
+    "imio",
     "fancylog",
     "imlib>=0.0.26",
     "napari[pyside2]>=0.3.7",
