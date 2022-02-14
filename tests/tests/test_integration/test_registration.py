@@ -12,7 +12,7 @@ data_dir = os.path.join(
     os.getcwd(),
     "tests",
     "data",
-    "brain data",
+    "brain",
 )
 
 test_niftyreg_output = os.path.join(
