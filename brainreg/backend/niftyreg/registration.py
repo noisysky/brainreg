@@ -221,6 +221,15 @@ class BrainRegistration(object):
         )
         return cmd
 
+    def _prepare_atlas_to_sample_deformation_field_cmd(self, deformation_field_path):
+        cmd = "{} -def {} {} -ref {}".format(
+            self.reg_params.transform_program_path,
+            '"' + self.paths.inverse_control_point_file_path + '"',
+            '"' + deformation_field_path + '"',
+            '"' + self.paths.brain_filtered + '"',
+        )
+        return cmd
+
     def segment(self):
         """
         Registers the atlas to the sample (propagates the transformation
@@ -288,6 +297,19 @@ class BrainRegistration(object):
         try:
             safe_execute_command(
                 self._prepare_deformation_field_cmd(deformation_field_path),
+                self.paths.deformation_log_file_path,
+                self.paths.deformation_error_file_path,
+            )
+        except SafeExecuteCommandError as err:
+            raise TransformationError(
+                "Generation of deformation field failed ; {}".format(err)
+            )
+
+    def generate_atlas_to_sample_deformation_field(self, deformation_field_path):
+        logging.info("Generating atlas to sample deformation field")
+        try:
+            safe_execute_command(
+                self._prepare_atlas_to_sample_deformation_field_cmd(deformation_field_path),
                 self.paths.deformation_log_file_path,
                 self.paths.deformation_error_file_path,
             )

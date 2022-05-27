@@ -37,6 +37,16 @@ class Paths:
         self.deformation_field_2 = self.make_reg_path(
             "deformation_field_2.tiff"
         )
+        # for each of x,y,z
+        self.deformation_field_atlas_to_sample_0 = self.make_reg_path(
+            "deformation_field_atlas_to_sample_0.tiff"
+        )
+        self.deformation_field_atlas_to_sample_1 = self.make_reg_path(
+            "deformation_field_atlas_to_sample_1.tiff"
+        )
+        self.deformation_field_atlas_to_sample_2 = self.make_reg_path(
+            "deformation_field_atlas_to_sample_2.tiff"
+        )
 
         self.volume_csv_path = self.make_reg_path("volumes.csv")
 

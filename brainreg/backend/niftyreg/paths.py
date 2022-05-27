@@ -58,6 +58,8 @@ class NiftyRegPaths:
         )
 
         self.deformation_field = self.make_reg_path("deformation_field.nii")
+        self.deformation_field_atlas_to_sample = self.make_reg_path("deformation_field_atlas_to_sample.nii")
+
         (
             self.deformation_log_file_path,
             self.deformation_error_file_path,

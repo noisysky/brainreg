@@ -105,8 +105,11 @@ def run_niftyreg(
         niftyreg_paths.downsampled_brain_standard_space,
     )
 
-    logging.info("Generating deformation field")
+    logging.info("Generating sample to atlas deformation field")
     brain_reg.generate_deformation_field(niftyreg_paths.deformation_field)
+
+    logging.info("Generating atlas to sample deformation field")
+    brain_reg.generate_atlas_to_sample_deformation_field(niftyreg_paths.deformation_field_atlas_to_sample)
 
     logging.info("Exporting images as tiff")
     imio.to_tiff(
@@ -155,6 +158,20 @@ def run_niftyreg(
     imio.to_tiff(
         deformation_image[..., 0, 2].astype(np.float32, copy=False),
         paths.deformation_field_2,
+    )
+
+    deformation_image = imio.load_any(niftyreg_paths.deformation_field_atlas_to_sample)
+    imio.to_tiff(
+        deformation_image[..., 0, 0].astype(np.float32, copy=False),
+        paths.deformation_field_atlas_to_sample_0,
+    )
+    imio.to_tiff(
+        deformation_image[..., 0, 1].astype(np.float32, copy=False),
+        paths.deformation_field_atlas_to_sample_1,
+    )
+    imio.to_tiff(
+        deformation_image[..., 0, 2].astype(np.float32, copy=False),
+        paths.deformation_field_atlas_to_sample_2,
     )
 
     if additional_images_downsample:
